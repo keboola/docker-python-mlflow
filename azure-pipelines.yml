@@ -1,0 +1,52 @@
+variables:
+  - name: imageTag
+    value: ${{ replace(variables['Build.SourceBranch'],'refs/tags/','') }}
+  - name: isTaggedBuild
+    value: ${{ startsWith(variables['Build.SourceBranch'],'refs/tags/') }}
+  - name: azureContainerRegistry
+    value: 'keboola-4338'
+  - name: imageRepository
+    value: 'docker-python-mlflow'
+
+pr: none
+trigger:
+  branches:
+    include: ['*']
+    exclude: ['master']
+  tags:
+    include: ['*']
+
+jobs:
+  - job: Build
+    pool:
+      vmImage: ubuntu-latest
+    timeoutInMinutes: 120
+    steps:
+    - script: docker info
+      displayName: 'Info'
+
+    - script: echo '##vso[task.setvariable variable=imageTag]$(Build.BuildId)'
+      displayName: "Set the imageTag to buildId if it's not a tag build"
+      condition: eq(variables['isTaggedBuild'], 'false')
+
+    - task: Docker@2
+      timeoutInMinutes: 120
+      inputs:
+        containerRegistry: $(azureContainerRegistry)
+        repository: $(imageRepository)
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          latest
+          $(imageTag)
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: $(azureContainerRegistry)
+        repository: $(imageRepository)
+        command: 'push'
+        tags: |
+          latest
+          $(imageTag)
+      condition: eq(variables['isTaggedBuild'], 'true')
+      displayName: 'Push latest to ACR'
