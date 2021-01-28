@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN /usr/local/bin/python -m pip install --upgrade pip
 
 # Install some commonly used packages and the Python application
-RUN pip3 install --no-cache-dir --upgrade --force-reinstall \
+RUN pip3 install --use-feature=2020-resolver --no-cache-dir --upgrade --force-reinstall \
+        avro \
+        fastavro \
         ipython \
         matplotlib \
         mlflow \
