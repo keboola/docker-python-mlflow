@@ -24,6 +24,7 @@ RUN pip3 install --use-feature=2020-resolver --no-cache-dir --upgrade --force-re
         pandas \
         scipy \
         scikit-learn \
+        git+git://github.com/keboola/sapi-python-client.git@0.1.3 \
     && pip3 install --no-cache-dir --upgrade --force-reinstall git+git://github.com/keboola/python-docker-application.git@2.1.1
 
 # Import matplotlib the first time to build the font cache.
