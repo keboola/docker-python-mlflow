@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-matplotlib \
         ipython \
         python-pandas \
+        unixodbc-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN /usr/local/bin/python -m pip install --upgrade pip
@@ -22,8 +23,10 @@ RUN pip3 install --use-feature=2020-resolver --no-cache-dir --upgrade --force-re
         mlflow \
         numpy \
         pandas \
+        pyodbc \
         scipy \
         scikit-learn \
+        SQLAlchemy \
         git+git://github.com/keboola/sapi-python-client.git@0.1.3 \
     && pip3 install --no-cache-dir --upgrade --force-reinstall git+git://github.com/keboola/python-docker-application.git@2.1.1
 
