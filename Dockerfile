@@ -17,6 +17,7 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 # Install some commonly used packages and the Python application
 RUN pip3 install --use-feature=2020-resolver --no-cache-dir --upgrade --force-reinstall \
         avro \
+        azure \
         fastavro \
         ipython \
         matplotlib \
@@ -32,4 +33,5 @@ RUN pip3 install --use-feature=2020-resolver --no-cache-dir --upgrade --force-re
 
 # Import matplotlib the first time to build the font cache.
 ENV XDG_CACHE_HOME /home/$NB_USER/.cache/
+ENV MPLCONFIGDIR /home/$NB_USER/.cache/matplotlib
 RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot"
