@@ -46,7 +46,6 @@ jobs:
         repository: $(imageRepository)
         command: 'push'
         tags: |
-          latest
           $(imageTag)
       condition: eq(variables['isTaggedBuild'], 'true')
       displayName: 'Push latest to ACR'
