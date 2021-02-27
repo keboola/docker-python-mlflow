@@ -18,6 +18,7 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip3 install --use-feature=2020-resolver --no-cache-dir --upgrade --force-reinstall \
         avro \
         azure \
+        azure-storage-blob \
         fastavro \
         ipython \
         matplotlib \
