@@ -17,7 +17,6 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 # Install some commonly used packages and the Python application
 RUN pip3 install --use-feature=2020-resolver --no-cache-dir --upgrade --force-reinstall \
         avro \
-        azure \
         azure-storage-blob==12.7.* \
         fastavro \
         ipython \
