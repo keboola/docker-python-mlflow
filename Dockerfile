@@ -24,6 +24,7 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip3 install --use-feature=2020-resolver --no-cache-dir --upgrade --force-reinstall \
         avro \
         azure-storage-blob==12.7.* \
+        boto3 \
         fastavro \
         ipython \
         matplotlib \
